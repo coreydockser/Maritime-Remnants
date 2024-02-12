@@ -42,12 +42,13 @@
             
             /*max-height: 800px;*/
             width: 100%;
-            
+            transition: 1s;
             font-family: Poppins;
         }
 
         #leaflet.is-active {
-            opacity: 100;
+            opacity: 100%;
+            transition: 1s;
         }
 
         #scrolly {
@@ -262,7 +263,7 @@ Center Coords: ${e.target._lastCenter}`);
             .setup({
 
                 step: ".step",
-                progress: true,
+                
             })
             .onStepProgress((response) => {
                 if (response.index > 0 && response.index < 2) {
@@ -274,9 +275,15 @@ Center Coords: ${e.target._lastCenter}`);
                 console.log(response)
                 // { element, index, direction }
                 response.element.classList.add("is-active")
+                if (response.index > 0) {
+                    leaflet.classed("is-active", true)
+                } else {
+                    leaflet.classed("is-active", false)
+                }
                 glacier_layer.clearLayers()
                 console.log(glacier_layer.getLayers())
                 switch(response.index) {
+                    case 0:
                     case 1:
                         glacier_layer.addLayer(glacier_18k)
                         break;
