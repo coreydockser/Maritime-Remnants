@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollama test</title>
+
+    <script src="https://unpkg.com/scrollama"></script>
+    <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
+        integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+        integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        body {
+            font-family: "Poppins", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+            letter-spacing: 0.08px;
+            word-spacing: 0.4px;
+            line-height: 1.5;
+        }
+
+        #leafletholder {
+            height: 0px;
+            position: sticky;
+            top: 25vh;
+            
+            z-index: 0;
+           
+        }
+        #leaflet {
+            opacity: 0;
+            height: 500px;
+            
+            /*max-height: 800px;*/
+            width: 100%;
+            
+            font-family: Poppins;
+        }
+
+        #leaflet.is-active {
+            opacity: 100;
+        }
+
+        #scrolly {
+            margin:auto;
+            position: relative;
+            max-width: 700px;
+        }
+
+        article {
+            position: relative;
+
+        }
+
+        .step {
+            display: flex;
+            max-width: 700px;
+            align-items: center;
+            margin: 2rem auto 4rem 2rem;
+        
+            color: #fff;
+            height: 800px;
+            z-index: 2000;
+            
+
+        }
+
+        #start {
+        }
+
+        .step.is-active {
+            
+            color: #3b3b3b;
+           
+        }
+
+        .step div,
+        p {
+            text-align: left;
+            padding: 3rem 1rem;
+            border:#3b3b3b;
+            border-style: solid;
+            border-width: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section id="scrolly">
+        <div id="leafletholder"><div id="leaflet"></div></div>
+        
+        <article>
+            <div class="step" data-step="a" id="start">
+                <p>In 1849, workers building a railroad between Burlington and Rutland uncovered a
+                    strange skeleton in a muddy field in Charlotte. While they initially thought it was a horse, it was
+                    in fact
+                    a
+                    beluga whale, found 200 miles from the ocean and 200 feet above sea level.
+                    <br><br>
+
+                    The Charlotte whale is evidence of a brief period in geologic history when, for the blink of an eye
+                    (in
+                    geological terms), the Atlantic Ocean covered the northeastern portion of the state. Its effects can
+                    be seen
+                    in
+                    finds like the Charlotte whale, but there are living remnants of that era, too. Their story begins
+                    30,000
+                    years
+                    ago.
+                </p>
+
+            </div>
+            <div class="step" data-step="b">
+                <div>
+                    <h1>30,000 years ago</h1>The Laurentide ice sheet, a massive continent-wide glacier covering Canada,
+                    makes
+                    its way into Vermont. The immense weight of the ice sheet gradually depresses the earth to hundreds
+                    of feet
+                    below sea level.
+                </div>
+            </div>
+            <div class="step" data-step="c">
+                <div>
+                    <h1>14,000 years ago</h1>Changes in the Earth’s orbit alter the climate just enough to cause the
+                    glaciers to retreat over thousands of years, leaving behind massive glacial lakes. The retreating
+                    glaciers also allow the land to rise, albeit very slowly, a process known as isostatic rebound.
+                </div>
+            </div>
+            <div class="step" data-step="d">
+                <div>
+                    <h1>11,000 years ago</h1>
+                    Once the glaciers have retreated enough, there is nothing left to block the Atlantic Ocean from
+                    flooding the
+                    depressed land, which at this point is 320 feet below sea level. The water floods in, creating a
+                    massive
+                    inlet from the Gulf of St. Lawrence to the modern location of Lake Champlain.
+                    <br><br>
+                    “And so what starts as a freshwater lake becomes a brackish Champlain sea.” - paul bierman, geology
+                    professor at
+                    uvm
+                </div>
+            </div>
+            <div class="step" data-step="e">
+                <div>
+                    <h1>10,000-9,000 years ago</h1>The depressed ground has risen back up to its previous pre-glacier
+                    level, cutting off the Atlantic Ocean. The Champlain Sea drains through the Gulf of St. Lawrence,
+                    while glacial melt combines with the remaining water to create Lake Champlain.
+                    <br><br>
+                    In terms of geological time, the Champlain Sea lasted for a blink of an eye.
+                    <br><br>
+                    But it left its mark. Glacial till, rock crushed and ground by glaciers, is found across the state,
+                    while rocks carried from far North called glacial erratics are similarly abundant. And even though
+                    thousands of years have passed, there are living remnants, too.
+                </div>
+            </div>
+        </article>
+    </section>
+    <script>
+
+        async function createMap() {
+
+            const glacier = await d3.json("data/laurentide.json")
+            const glacier_features = glacier.features
+            console.log(glacier_features)
+            console.log()
+            
+
+            const map = L.map("leaflet", {
+                zoomControl: false,
+                attributionControl: false
+            }).setView(
+                [43.98206217068121, -72.76202233129307
+                ],
+                6
+            );
+
+            var renderer = L.svg({padding: 20})
+
+
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+                attribution: `Data Source: <a href="https://www.arcgis.com/home/item.html?id=3cdc21a5c86c4e13aeab93ca847e0324">VT ANR</a> | Tiles &copy; Esri | <i>Corey Dockser / Vermont Public </i>`,
+            }).addTo(map);
+
+        
+
+            const glacier_14k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "14k"), {
+                style : function(geoJsonFeature) {
+                    return { 
+                    fillColor: "#a1eaff",
+                    fillOpacity: .8,
+                    color: "#84becf",
+                    weight: 5,
+
+                    }
+                    
+                },
+                renderer: renderer
+
+            })
+
+            const glacier_11k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "11k"), {
+                style : function(geoJsonFeature) {
+                    return { 
+                    fillColor: "#a1eaff",
+                    fillOpacity: .8,
+                    color: "#84becf",
+                    weight: 5,
+
+                    }
+                },
+                renderer: renderer
+            })
+
+            const glacier_18k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "18k"), {
+                style : function(geoJsonFeature) {
+                    return { 
+                    fillColor: "#a1eaff",
+                    fillOpacity: .8,
+                    color: "#84becf",
+                    weight: 5,
+
+                    }
+                },
+                renderer: renderer
+            })
+            console.log(glacier_11k, glacier_14k, glacier_18k)
+            
+            var glacier_layer = L.layerGroup().addTo(map)
+
+
+            map.on('zoomend', function (e) {
+                console.log(`Zoom Level: ${e.target._zoom}
+Center Coords: ${e.target._lastCenter}`);
+                console.log(e.target._lastCenter)
+            });
+        
+        // instantiate the scrollama
+
+        var leaflet = d3.select("#leaflet")
+        var article = d3.select("article")
+        var step = article.selectAll(".step")
+
+        const scroller = scrollama();
+
+      
+        
+
+        // setup the instance, pass callback functions
+        scroller
+            .setup({
+
+                step: ".step",
+                progress: true,
+            })
+            .onStepProgress((response) => {
+                if (response.index > 0 && response.index < 2) {
+                    leaflet.style("opacity", response.progress * 3)      
+                }
+                
+            })
+            .onStepEnter((response) => {
+                console.log(response)
+                // { element, index, direction }
+                response.element.classList.add("is-active")
+                glacier_layer.clearLayers()
+                console.log(glacier_layer.getLayers())
+                switch(response.index) {
+                    case 1:
+                        glacier_layer.addLayer(glacier_18k)
+                        break;
+                    case 2: 
+                        glacier_layer.addLayer(glacier_14k)
+                        map.flyTo([44.359206, -74.707031], 5)
+                        break;
+                    case 3:
+                        glacier_layer.addLayer(glacier_11k)
+                        map.flyTo([45.641888, -72.103271], 7)
+                        break;
+                }
+                console.log(glacier_layer.getLayers())
+              
+                
+                
+            })
+            .onStepExit((response) => {
+                console.log(response)
+                // { element, index, direction }
+                response.element.classList.remove("is-active")
+
+                
+                
+            });
+
+        }
+        createMap()
+
+    </script>
+
+
+
+</body>
+
+</html>
