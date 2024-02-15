@@ -83,7 +83,9 @@
 
         }
 
-        #start {
+        .leaflet-control-attribution {
+            
+            max-width: 50%;
         }
 
         .step.is-active {
@@ -101,6 +103,11 @@
             border-style: solid;
             border-width: 5px;
             background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        #credits {
+            color: rgb(118, 118, 118);
+            font-size: 11px;
         }
     </style>
 
@@ -144,9 +151,9 @@
             </div>
             <div class="step" data-step="c">
                 <div>
-                    <h1>14,000 years ago</h1>Changes in the Earth’s orbit alter the climate just enough to cause the
-                    glaciers to retreat over thousands of years, leaving behind massive glacial lakes. The retreating
-                    glaciers also allow the land to rise, albeit very slowly, a process known as isostatic rebound.
+                    <h1>14,000 years ago</h1>Changes in the Earth’s orbit about 24,000 years ago alter the climate just enough to cause the
+                    glaciers to retreat over thousands of years, leaving behind massive glacial lakes. By this time, the glaciers have retreated to the canadian border. The retreating
+                    glaciers also allow the land to rise, albeit very slowly, a process known as <a href="https://en.wikipedia.org/wiki/Post-glacial_rebound">isostatic rebound</a>.
                 </div>
             </div>
             <div class="step" data-step="d">
@@ -174,6 +181,8 @@
                 </div>
             </div>
         </article>
+        <div id="credits">Image credit: Angela Evancie / Vermont Public. Laurentide ice sheet shapefiles from <a href=http://www.glyfac.buffalo.edu/Faculty/briner/buf/pubs/Dalton_et_al_2020_w_maps.pdf>An updated radiocarbon-based ice margin chronology for the last
+        deglaciation of the North American Ice Sheet Complex by Dalton et al (2020)</a>. Glacial lake shapefiles from <a href="https://anrgeodata.vermont.gov/datasets/VTANR::glacial-lakes-and-the-champlain-sea/about">Major Glacial Lakes and the Champlain Sea, Vermont (2020). Map Compilers: G. Springston, S. Wright and J. Van Hoesen</a>.</div>
     </section>
     <script>
 
@@ -182,12 +191,15 @@
             const glacier = await d3.json("data/glaciers.json")
             const glacier_features = glacier.features
             console.log(glacier_features)
+            const lakes = await d3.json("data/lakes.json")
+            const lakes_features = lakes.features
+            console.log(lakes_features)
             
             
 
             const map = L.map("leaflet", {
                 zoomControl: false,
-                attributionControl: false
+                
             }).setView(
                 [44.359206, -74.707031
                 ],
@@ -198,7 +210,7 @@
 
 
             L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-                attribution: `Data Source: <a href="https://www.arcgis.com/home/item.html?id=3cdc21a5c86c4e13aeab93ca847e0324">VT ANR</a> | Tiles &copy; Esri | <i>Corey Dockser / Vermont Public </i>`,
+                attribution: `Data Source: <a href="https://www.arcgis.com/home/item.html?id=3cdc21a5c86c4e13aeab93ca847e0324">VT ANR</a> | &copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> | <i>Corey Dockser / Vermont Public </i>`,
             }).addTo(map);
 
         
@@ -231,6 +243,9 @@
                 renderer: renderer
             })
 
+            
+            
+
             const glacier_22cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "22.1cal"), {
                 style : function(geoJsonFeature) {
                     return { 
@@ -244,6 +259,18 @@
                 renderer: renderer
             })
             console.log(glacier_11cal, glacier_13cal, glacier_22cal)
+
+            const lakes_json = L.geoJSON(lakes_features.filter(d => d.properties.YEAR == "lakes"), {
+                style : function(geoJsonFeature) {
+                    return { 
+                    fillColor: "#00b3ff",
+                    fillOpacity: .8,
+                    stroke:false
+
+                    }
+                },
+                renderer: renderer
+            })
             
             var glacier_layer = L.layerGroup().addTo(map)
 
@@ -282,7 +309,7 @@ Center Coords: ${e.target._lastCenter}`);
                 console.log(response)
                 // { element, index, direction }
                 response.element.classList.add("is-active")
-                if (response.index > 0) {
+                if (response.index > 0 && response.index < 4) {
                     leaflet.classed("is-active", true)
                 } else {
                     leaflet.classed("is-active", false)
@@ -293,14 +320,17 @@ Center Coords: ${e.target._lastCenter}`);
                     case 0:
                     case 1:
                         glacier_layer.addLayer(glacier_22cal)
+                        map.flyTo([44.359206, -74.707031], 5)
                         break;
                     case 2: 
+                    glacier_layer.addLayer(lakes_json)
                         glacier_layer.addLayer(glacier_13cal)
-                        map.flyTo([44.359206, -74.707031], 5)
+                        
+                        map.flyTo([44.359206, -73.007031], 7)
                         break;
                     case 3:
                         glacier_layer.addLayer(glacier_11cal)
-                        map.flyTo([45.641888, -72.103271], 7)
+                        map.flyTo([45.641888, -72.103271], 5)
                         break;
                 }
                 console.log(glacier_layer.getLayers())
