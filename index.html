@@ -36,6 +36,13 @@
             z-index: 0;
            
         }
+
+        #whale {
+            position: absolute;
+            max-height:500px;
+            width: 100%;
+            top: 200px;
+        }
         #leaflet {
             opacity: 0;
             height: 500px;
@@ -93,7 +100,7 @@
             border:#3b3b3b;
             border-style: solid;
             border-width: 5px;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.75);
         }
     </style>
 
@@ -102,6 +109,7 @@
 <body>
 
     <section id="scrolly">
+        <img id="whale" src="img/charlotte_whale.jpeg">
         <div id="leafletholder"><div id="leaflet"></div></div>
         
         <article>
