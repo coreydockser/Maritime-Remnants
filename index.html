@@ -150,9 +150,6 @@
                     massive
                     inlet from the Gulf of St. Lawrence to the modern location of Lake Champlain.
                     <br><br>
-                    “And so what starts as a freshwater lake becomes a brackish Champlain sea.” - paul bierman, geology
-                    professor at
-                    uvm
                 </div>
             </div>
             <div class="step" data-step="e">
@@ -174,19 +171,19 @@
 
         async function createMap() {
 
-            const glacier = await d3.json("data/laurentide.json")
+            const glacier = await d3.json("data/glaciers.json")
             const glacier_features = glacier.features
             console.log(glacier_features)
-            console.log()
+            
             
 
             const map = L.map("leaflet", {
                 zoomControl: false,
                 attributionControl: false
             }).setView(
-                [43.98206217068121, -72.76202233129307
+                [44.359206, -74.707031
                 ],
-                6
+                5
             );
 
             var renderer = L.svg({padding: 20})
@@ -198,7 +195,7 @@
 
         
 
-            const glacier_14k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "14k"), {
+            const glacier_13cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "13.5cal"), {
                 style : function(geoJsonFeature) {
                     return { 
                     fillColor: "#a1eaff",
@@ -213,7 +210,7 @@
 
             })
 
-            const glacier_11k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "11k"), {
+            const glacier_11cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "11.5cal"), {
                 style : function(geoJsonFeature) {
                     return { 
                     fillColor: "#a1eaff",
@@ -226,7 +223,7 @@
                 renderer: renderer
             })
 
-            const glacier_18k = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "18k"), {
+            const glacier_22cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "22.1cal"), {
                 style : function(geoJsonFeature) {
                     return { 
                     fillColor: "#a1eaff",
@@ -238,7 +235,7 @@
                 },
                 renderer: renderer
             })
-            console.log(glacier_11k, glacier_14k, glacier_18k)
+            console.log(glacier_11cal, glacier_13cal, glacier_22cal)
             
             var glacier_layer = L.layerGroup().addTo(map)
 
@@ -287,14 +284,14 @@ Center Coords: ${e.target._lastCenter}`);
                 switch(response.index) {
                     case 0:
                     case 1:
-                        glacier_layer.addLayer(glacier_18k)
+                        glacier_layer.addLayer(glacier_22cal)
                         break;
                     case 2: 
-                        glacier_layer.addLayer(glacier_14k)
+                        glacier_layer.addLayer(glacier_13cal)
                         map.flyTo([44.359206, -74.707031], 5)
                         break;
                     case 3:
-                        glacier_layer.addLayer(glacier_11k)
+                        glacier_layer.addLayer(glacier_11cal)
                         map.flyTo([45.641888, -72.103271], 7)
                         break;
                 }
