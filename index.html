@@ -33,14 +33,14 @@
             position: sticky;
             top: 0px;
             z-index: 0;
-           
+
         }
 
-        
+
         #leaflet {
             opacity: 0;
             height: 600px;
-            
+
             /*max-height: 800px;*/
             width: 100%;
             transition: 1s;
@@ -53,7 +53,7 @@
         }
 
         #scrolly {
-            margin:auto;
+            margin: auto;
             position: relative;
             max-width: 700px;
         }
@@ -68,25 +68,25 @@
             display: flex;
             max-width: 700px;
             align-items: center;
-            
-        
+
+
             color: #fff;
             height: 600px;
             z-index: 2000;
-            
+
 
         }
 
         .leaflet-control-attribution {
-            
+
             max-width: 50%;
         }
 
         .step.is-active {
-            
-          
+
+
             color: #3b3b3b;
-           
+
         }
 
         .step div,
@@ -94,7 +94,7 @@
             text-align: left;
             padding: 3rem 1rem;
             margin: 10px;
-            border:#3b3b3b;
+            border: #3b3b3b;
             border-style: solid;
             border-width: 5px;
             background-color: rgba(255, 255, 255, 0.75);
@@ -103,6 +103,7 @@
         #credits {
             color: rgb(118, 118, 118);
             font-size: 11px;
+            z-index: 5000;
         }
     </style>
 
@@ -111,16 +112,19 @@
 <body>
 
     <section id="scrolly">
-        
-        <div id="leafletholder"><div id="leaflet"></div></div>
-        
+
+        <div id="leafletholder">
+            <div id="leaflet"></div>
+        </div>
+
         <article>
             <div class="step" data-step="a" id="start">
                 <p>In 1849, workers building a railroad between Burlington and Rutland uncovered a
                     strange skeleton in a muddy field in Charlotte. While they initially thought it was a horse, it was
                     in fact
                     a
-                    <a href="https://www.vermontpublic.org/vpr-news/2014-03-06/a-whale-in-vermont-the-story-behind-the-states-most-famous-fossil" target="_blank">beluga whale</a>, found 200 miles from the ocean and 200 feet above sea level.
+                    <a href="https://www.vermontpublic.org/vpr-news/2014-03-06/a-whale-in-vermont-the-story-behind-the-states-most-famous-fossil"
+                        target="_blank">beluga whale</a>, found 200 miles from the ocean and 200 feet above sea level.
                     <br><br>
 
                     The Charlotte whale is evidence of a brief period in geologic history when, for the blink of an eye
@@ -146,10 +150,13 @@
             </div>
             <div class="step" data-step="c">
                 <div>
-                    <h1>14,000 years ago</h1>Changes in the Earth’s orbit about 24,000 years ago alter the climate just enough to cause the
-                    glaciers to retreat over thousands of years, leaving behind massive glacial lakes. By this time, the glaciers have retreated to the canadian border. The retreating
-                    glaciers also allow the land to rise, albeit very slowly, a process known as <a href="https://en.wikipedia.org/wiki/Post-glacial_rebound" target="_blank">isostatic rebound</a>.
-                    
+                    <h1>14,000 years ago</h1>Changes in the Earth’s orbit about 24,000 years ago alter the climate just
+                    enough to cause the
+                    glaciers to retreat over thousands of years, leaving behind massive glacial lakes. By this time, the
+                    glaciers have retreated to the canadian border. The retreating
+                    glaciers also allow the land to rise, albeit very slowly, a process known as <a
+                        href="https://en.wikipedia.org/wiki/Post-glacial_rebound" target="_blank">isostatic rebound</a>.
+
                 </div>
             </div>
             <div class="step" data-step="d">
@@ -177,10 +184,23 @@
                 </div>
             </div>
         </article>
-        <div id="credits">Laurentide ice sheet shapefiles from <a href=http://www.glyfac.buffalo.edu/Faculty/briner/buf/pubs/Dalton_et_al_2020_w_maps.pdf>An updated radiocarbon-based ice margin chronology for the last
-        deglaciation of the North American Ice Sheet Complex by Dalton et al (2020)</a>. Glacial lake shapefiles from <a href="https://anrgeodata.vermont.gov/datasets/VTANR::glacial-lakes-and-the-champlain-sea/about">Major Glacial Lakes and the Champlain Sea, Vermont (2020). Map Compilers: G. Springston, S. Wright and J. Van Hoesen</a>. Champlain Sea shapefile from Post-valley
-        heads deglaciation of the Adirondack Mountains
-        and adjacent lowlands</div>
+        <div id="credits">Laurentide ice sheet shapefiles from Dalton, April
+                Sue & Margold, Martin & Stokes, Chris & Tarasov, Lev & Dyke, Arthur & Adams, Roberta & Allard, Serge &
+                Arends, Heather & Atkinson, Nigel & Attig, John & Barnett, Peter & Barnett, Robert & Batterson, Martin &
+                Bernatchez, Pascal & Borns, Harold & Breckenridge, Andy & Briner, Jason & Brouard, Etienne & Campbell,
+                Janet & Wright, Herbert. (2020). <a
+                href=http://www.glyfac.buffalo.edu/Faculty/briner/buf/pubs/Dalton_et_al_2020_w_maps.pdf>An updated radiocarbon-based ice margin chronology for the last
+                deglaciation of the North American Ice Sheet Complex. Quaternary Science Reviews. 234. 106223.
+                10.1016/j.quascirev.2020.106223.</a><br> Glacial lake shapefiles
+            from <a
+                href="https://anrgeodata.vermont.gov/datasets/VTANR::glacial-lakes-and-the-champlain-sea/about">Major
+                Glacial Lakes and the Champlain Sea, Vermont (2020). Map Compilers: G. Springston, S. Wright and J. Van
+                Hoesen</a>. Champlain Sea shapefile from Franzi, David & Ridge, John & Pair, Donald & Desimone, David &
+            Rayburn, John & Barclay, David. (2016). <a
+                href="https://digitalworks.union.edu/cgi/viewcontent.cgi?article=1010&context=ajes">Post-Valley Heads
+                deglaciation of the Adirondack Mountains and
+                adjacent lowlands.</a> Adirondack Journal of Environmental Studies. 21. 119-146.
+            and adjacent lowlands</div>
     </section>
     <script>
 
@@ -194,66 +214,66 @@
             const sea = await d3.json("data/champlain_sea.json")
             const sea_features = sea.features
             console.log(sea)
-            
-            
-            
+
+
+
 
             const map = L.map("leaflet", {
                 zoomControl: false,
-                
+
             }).setView(
                 [44.359206, -74.707031
                 ],
                 5
             );
 
-            var renderer = L.svg({padding: 20})
+            var renderer = L.svg({ padding: 20 })
 
 
             L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
                 attribution: `Data Source: <a href="https://www.arcgis.com/home/item.html?id=3cdc21a5c86c4e13aeab93ca847e0324">VT ANR</a> | &copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> | <i>Corey Dockser / Vermont Public </i>`,
             }).addTo(map);
 
-        
+
 
             const glacier_13cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "13.5cal"), {
-                style : function(geoJsonFeature) {
-                    return { 
-                    fillColor: "#a1eaff",
-                    fillOpacity: .8,
-                    color: "#84becf",
-                    weight: 5,
+                style: function (geoJsonFeature) {
+                    return {
+                        fillColor: "#a1eaff",
+                        fillOpacity: .8,
+                        color: "#84becf",
+                        weight: 5,
 
                     }
-                    
+
                 },
                 renderer: renderer
 
             })
 
             const glacier_11cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "11.5cal"), {
-                style : function(geoJsonFeature) {
-                    return { 
-                    fillColor: "#a1eaff",
-                    fillOpacity: .8,
-                    color: "#84becf",
-                    weight: 5,
+                style: function (geoJsonFeature) {
+                    return {
+                        fillColor: "#a1eaff",
+                        fillOpacity: .8,
+                        color: "#84becf",
+                        weight: 5,
 
                     }
                 },
                 renderer: renderer
             })
 
-            
-            
+
+
 
             const glacier_22cal = L.geoJSON(glacier_features.filter(d => d.properties.YEAR == "22.1cal"), {
-                style : function(geoJsonFeature) {
-                    return { 
-                    fillColor: "#a1eaff",
-                    fillOpacity: .8,
-                    color: "#84becf",
-                    weight: 5,
+                style: function (geoJsonFeature) {
+                    return {
+                        fillColor: "#a1eaff",
+                        fillOpacity: .8,
+                        color: "#84becf",
+                        weight: 5,
 
                     }
                 },
@@ -262,11 +282,11 @@
             console.log(glacier_11cal, glacier_13cal, glacier_22cal)
 
             const lakes_json = L.geoJSON(lakes_features, {
-                style : function(geoJsonFeature) {
-                    return { 
-                    fillColor: "#00b3ff",
-                    fillOpacity: .8,
-                    stroke:false
+                style: function (geoJsonFeature) {
+                    return {
+                        fillColor: "#00b3ff",
+                        fillOpacity: .8,
+                        stroke: false
 
                     }
                 },
@@ -274,16 +294,16 @@
             })
 
             const sea_layer = L.geoJSON(sea_features, {
-                style : function(geoJsonFeature) {
-                    return { 
-                    fillColor: "#00b3ff",
-                    fillOpacity: .8,
-                    stroke:false
+                style: function (geoJsonFeature) {
+                    return {
+                        fillColor: "#00b3ff",
+                        fillOpacity: .8,
+                        stroke: false
                     }
                 },
                 renderer: renderer
             })
-            
+
             var glacier_layer = L.layerGroup().addTo(map)
 
 
@@ -292,73 +312,73 @@
 Center Coords: ${e.target._lastCenter}`);
                 console.log(e.target._lastCenter)
             });
-        
-        // instantiate the scrollama
 
-        var leaflet = d3.select("#leaflet")
-        var article = d3.select("article")
-        var step = article.selectAll(".step")
+            // instantiate the scrollama
 
-        const scroller = scrollama();
+            var leaflet = d3.select("#leaflet")
+            var article = d3.select("article")
+            var step = article.selectAll(".step")
 
-      
-        
+            const scroller = scrollama();
 
-        // setup the instance, pass callback functions
-        scroller
-            .setup({
-                
-                step: ".step",
-                
-            })
-            .onStepProgress((response) => {
-                if (response.index > 0 && response.index < 2) {
-                    leaflet.style("opacity", response.progress * 3)      
-                }
-                
-            })
-            .onStepEnter((response) => {
-                console.log(response)
-                // { element, index, direction }
-                response.element.classList.add("is-active")
-                if (response.index > 0 && response.index < 4) {
-                    leaflet.classed("is-active", true)
-                } else {
-                    leaflet.classed("is-active", false)
-                }
-                glacier_layer.clearLayers()
-                console.log(glacier_layer.getLayers())
-                switch(response.index) {
-                    case 0:
-                    case 1:
-                        glacier_layer.addLayer(glacier_22cal)
-                        map.flyTo([44.359206, -74.707031], 5)
-                        break;
-                    case 2: 
-                    glacier_layer.addLayer(lakes_json)
-                        glacier_layer.addLayer(glacier_13cal)
-                        
-                        map.flyTo([44.359206, -73.007031], 7)
-                        break;
-                    case 3:
-                        glacier_layer.addLayer(sea_layer)
-                        glacier_layer.addLayer(glacier_11cal)
-                        map.flyTo([44.200749, -73.77255], 8)
-                        break;
-                }
-                console.log(glacier_layer.getLayers())
-              
-                
-                
-            })
-            .onStepExit((response) => {
-                console.log(response)
-                // { element, index, direction }
-                response.element.classList.remove("is-active")
 
-                
-                
-            });
+
+
+            // setup the instance, pass callback functions
+            scroller
+                .setup({
+
+                    step: ".step",
+
+                })
+                .onStepProgress((response) => {
+                    if (response.index > 0 && response.index < 2) {
+                        leaflet.style("opacity", response.progress * 3)
+                    }
+
+                })
+                .onStepEnter((response) => {
+                    console.log(response)
+                    // { element, index, direction }
+                    response.element.classList.add("is-active")
+                    if (response.index > 0 && response.index < 4) {
+                        leaflet.classed("is-active", true)
+                    } else {
+                        leaflet.classed("is-active", false)
+                    }
+                    glacier_layer.clearLayers()
+                    console.log(glacier_layer.getLayers())
+                    switch (response.index) {
+                        case 0:
+                        case 1:
+                            glacier_layer.addLayer(glacier_22cal)
+                            map.flyTo([44.359206, -74.707031], 5)
+                            break;
+                        case 2:
+                            glacier_layer.addLayer(lakes_json)
+                            glacier_layer.addLayer(glacier_13cal)
+
+                            map.flyTo([44.359206, -73.007031], 7)
+                            break;
+                        case 3:
+                            glacier_layer.addLayer(sea_layer)
+                            glacier_layer.addLayer(glacier_11cal)
+                            map.flyTo([44.200749, -73.77255], 8)
+                            break;
+                    }
+                    console.log(glacier_layer.getLayers())
+
+
+
+                })
+                .onStepExit((response) => {
+                    console.log(response)
+                    // { element, index, direction }
+                    response.element.classList.remove("is-active")
+
+
+
+                });
 
         }
         createMap()
