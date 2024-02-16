@@ -182,8 +182,10 @@
                 </div>
             </div>
         </article>
-        <div id="credits">Image credit: Angela Evancie / Vermont Public. Laurentide ice sheet shapefiles from <a href=http://www.glyfac.buffalo.edu/Faculty/briner/buf/pubs/Dalton_et_al_2020_w_maps.pdf>An updated radiocarbon-based ice margin chronology for the last
-        deglaciation of the North American Ice Sheet Complex by Dalton et al (2020)</a>. Glacial lake shapefiles from <a href="https://anrgeodata.vermont.gov/datasets/VTANR::glacial-lakes-and-the-champlain-sea/about">Major Glacial Lakes and the Champlain Sea, Vermont (2020). Map Compilers: G. Springston, S. Wright and J. Van Hoesen</a>.</div>
+        <div id="credits">Laurentide ice sheet shapefiles from <a href=http://www.glyfac.buffalo.edu/Faculty/briner/buf/pubs/Dalton_et_al_2020_w_maps.pdf>An updated radiocarbon-based ice margin chronology for the last
+        deglaciation of the North American Ice Sheet Complex by Dalton et al (2020)</a>. Glacial lake shapefiles from <a href="https://anrgeodata.vermont.gov/datasets/VTANR::glacial-lakes-and-the-champlain-sea/about">Major Glacial Lakes and the Champlain Sea, Vermont (2020). Map Compilers: G. Springston, S. Wright and J. Van Hoesen</a>. Champlain Sea shapefile from Post-valley
+        heads deglaciation of the Adirondack Mountains
+        and adjacent lowlands</div>
     </section>
     <script>
 
@@ -191,10 +193,13 @@
 
             const glacier = await d3.json("data/glaciers.json")
             const glacier_features = glacier.features
-            console.log(glacier_features)
+            console.log(glacier)
             const lakes = await d3.json("data/lakes.json")
             const lakes_features = lakes.features
-            console.log(lakes_features)
+            const sea = await d3.json("data/champlain_sea.json")
+            const sea_features = sea.features
+            console.log(sea)
+            
             
             
 
@@ -261,13 +266,24 @@
             })
             console.log(glacier_11cal, glacier_13cal, glacier_22cal)
 
-            const lakes_json = L.geoJSON(lakes_features.filter(d => d.properties.YEAR == "lakes"), {
+            const lakes_json = L.geoJSON(lakes_features, {
                 style : function(geoJsonFeature) {
                     return { 
                     fillColor: "#00b3ff",
                     fillOpacity: .8,
                     stroke:false
 
+                    }
+                },
+                renderer: renderer
+            })
+
+            const sea_layer = L.geoJSON(sea_features, {
+                style : function(geoJsonFeature) {
+                    return { 
+                    fillColor: "#00b3ff",
+                    fillOpacity: .8,
+                    stroke:false
                     }
                 },
                 renderer: renderer
@@ -330,8 +346,9 @@ Center Coords: ${e.target._lastCenter}`);
                         map.flyTo([44.359206, -73.007031], 7)
                         break;
                     case 3:
+                        glacier_layer.addLayer(sea_layer)
                         glacier_layer.addLayer(glacier_11cal)
-                        map.flyTo([45.641888, -72.103271], 5)
+                        map.flyTo([44.500749, -73.77255], 8)
                         break;
                 }
                 console.log(glacier_layer.getLayers())
