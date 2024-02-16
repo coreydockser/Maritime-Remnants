@@ -40,7 +40,7 @@
         #leaflet {
             opacity: 0;
             height: 600px;
-
+            pointer-events:none;
             /*max-height: 800px;*/
             width: 100%;
             transition: 1s;
@@ -331,12 +331,7 @@ Center Coords: ${e.target._lastCenter}`);
                     step: ".step",
 
                 })
-                .onStepProgress((response) => {
-                    if (response.index > 0 && response.index < 2) {
-                        leaflet.style("opacity", response.progress * 3)
-                    }
-
-                })
+               
                 .onStepEnter((response) => {
                     console.log(response)
                     // { element, index, direction }
